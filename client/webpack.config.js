@@ -2,6 +2,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
 const { InjectManifest } = require("workbox-webpack-plugin");
+// addresses error with Webpack 5 not polyfilling Node core modules. This is one part of the fix.
+const NodePolyfillWebpackPlugin = require("node-polyfill-webpack-plugin");
 
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
 // TODO: Add CSS loaders and babel to webpack.
@@ -9,6 +11,15 @@ const { InjectManifest } = require("workbox-webpack-plugin");
 module.exports = () => {
   return {
     mode: "development",
+    // added to fix errors in webpack not bundling node core modules
+    resolve: {
+      fallback: {
+        fs: false,
+        module: false,
+        child_process: false,
+        worker_threads: false,
+      },
+    },
     entry: {
       main: "./src/js/index.js",
       install: "./src/js/install.js",
@@ -18,6 +29,7 @@ module.exports = () => {
       path: path.resolve(__dirname, "dist"),
     },
     plugins: [
+      new NodePolyfillWebpackPlugin(),
       // Webpack plugin that generates our html file and injects our bundles.
       new HtmlWebpackPlugin({
         template: "./index.html",
