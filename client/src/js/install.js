@@ -5,9 +5,10 @@ const butInstall = document.getElementById("buttonInstall");
 window.addEventListener("beforeinstallprompt", (event) => {
   // store the triggered event
   window.deferredPrompt = event;
-
-  // toggle install button visbility on
-  butInstall.classList.toggle("hidden", false);
+  if (window.matchMedia("(display-mode: standalone)").matches === false) {
+    // toggle install button visbility on
+    butInstall.classList.toggle("hidden", false);
+  }
 });
 
 // TODO: Implement a click event handler on the `butInstall` element
