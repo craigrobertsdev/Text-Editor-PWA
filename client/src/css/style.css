@@ -79,6 +79,10 @@ h1 {
   margin: 25px;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .btn {
   text-align: center;
   display: inline-block;
