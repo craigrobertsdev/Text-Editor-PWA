@@ -29,6 +29,7 @@ module.exports = () => {
       path: path.resolve(__dirname, "dist"),
     },
     plugins: [
+      // added to fix errors in webpack not bundling node core modules
       new NodePolyfillWebpackPlugin(),
       // Webpack plugin that generates our html file and injects our bundles.
       new HtmlWebpackPlugin({
@@ -51,6 +52,7 @@ module.exports = () => {
         theme_color: "#225ca3",
         start_url: "./",
         publicPath: "./",
+        display: "standalone",
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
