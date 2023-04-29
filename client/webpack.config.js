@@ -5,19 +5,16 @@ const { InjectManifest } = require("workbox-webpack-plugin");
 // addresses error with Webpack 5 not polyfilling Node core modules. This is one part of the fix.
 const NodePolyfillWebpackPlugin = require("node-polyfill-webpack-plugin");
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
-
 module.exports = () => {
   return {
     mode: "development",
     // added to fix errors in webpack not bundling node core modules
     resolve: {
       fallback: {
-        fs: false,
-        module: false,
-        child_process: false,
-        worker_threads: false,
+        // fs: false,
+        // module: false,
+        // child_process: false,
+        // worker_threads: false,
       },
     },
     entry: {
